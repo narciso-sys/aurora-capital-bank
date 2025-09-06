@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aurora Capital Bank | O Futuro das Finanças</title>
+    
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Teko:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- App Background & Overlays -->
+    <div id="app-background"></div>
+    <div id="loading"><div class="loading-spinner"></div></div>
+    <div id="toast" class="toast"></div>
+
+    <!-- Main Navigation Bar -->
+    <header class="navbar hidden" id="navbar">
+        <div class="nav-logo"><i data-lucide="zap"></i><h1>AURORA</h1></div>
+        <nav class="nav-links">
+            <a href="#dashboard" class="nav-link active" title="Dashboard"><i data-lucide="layout-dashboard"></i></a>
+            <a href="#transactions" class="nav-link" title="Transações"><i data-lucide="arrow-right-left"></i></a>
+            <a href="#cards" class="nav-link" title="Cartões"><i data-lucide="credit-card"></i></a>
+            <a href="#investments" class="nav-link" title="Investimentos"><i data-lucide="trending-up"></i></a>
+            <a href="#store" class="nav-link" title="Loja"><i data-lucide="shopping-cart"></i></a>
+            <a href="#my-products" class="nav-link" title="Meus Produtos"><i data-lucide="package"></i></a>
+            <a href="#games" class="nav-link" title="Jogos"><i data-lucide="gamepad-2"></i></a>
+        </nav>
+        <div class="nav-user-actions">
+            <button id="theme-toggle" class="nav-link" title="Mudar Tema"><i data-lucide="moon"></i></button>
+            <a href="#settings" class="nav-link" title="Definições"><i data-lucide="settings"></i></a>
+            <button id="logoutBtn" class="nav-link logout-btn" title="Sair"><i data-lucide="log-out"></i></button>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main id="app"></main>
+    
+    <!-- Floating Action Button for AI Assistant -->
+    <button id="ai-help-fab" class="fab hidden" title="Ajuda da IA Aurora"><i data-lucide="sparkles"></i></button>
+
+    <!-- Firebase SDKs -->
+    <script type="module">
+        // Import Firebase modules
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, reauthenticateWithCredential, EmailAuthProvider, updatePassword, deleteUser } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        import { getDatabase, ref, set, get, onValue, off, serverTimestamp, push, update, remove } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+        
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyChvOc4mp34Xj1H-eVymYvmLoocRcJOUEw",
+            authDomain: "aurora-f5c63.firebaseapp.com",
+            databaseURL: "https://aurora-f5c63-default-rtdb.firebaseio.com",
+            projectId: "aurora-f5c63",
+            storageBucket: "aurora-f5c63.firebasestorage.app",
+            messagingSenderId: "74923929901",
+            appId: "1:74923929901:web:a7a3d970b95e57121fa3a4"
+        };
+
+        // Initialize Firebase
+        try {
+            const app = initializeApp(firebaseConfig);
+            const auth = getAuth(app);
+            const db = getDatabase(app);
+            
+            // Make Firebase services globally available
+            window.firebase = {
+                app,
+                auth,
+                db,
+                authFunc: { 
+                    onAuthStateChanged, 
+                    createUserWithEmailAndPassword, 
+                    signInWithEmailAndPassword, 
+                    signOut, 
+                    reauthenticateWithCredential, 
+                    EmailAuthProvider, 
+                    updatePassword, 
+                    deleteUser 
+                },
+                dbFunc: { 
+                    ref, 
+                    set, 
+                    get, 
+                    onValue, 
+                    off, 
+                    serverTimestamp, 
+                    push,
+                    update,
+                    remove
+                }
+            };
+            
+            window.firebaseReady = true;
+            console.log("Firebase v10.12.2 inicializado com sucesso.");
+            
+            // Hide loading spinner
+            const loadingElement = document.getElementById('loading');
+            if (loadingElement) {
+                loadingElement.classList.add('hidden');
+            }
+        } catch (e) {
+            console.error("Erro ao inicializar o Firebase:", e);
+            window.firebaseReady = false;
+            
+            // Hide loading and show error
+            const loadingElement = document.getElementById('loading');
+            if (loadingElement) {
+                loadingElement.classList.add('hidden');
+            }
+            
+            const appElement = document.getElementById('app');
+            if (appElement) {
+                appElement.innerHTML = `
+                    <div class="auth-container">
+                        <div class="glass-panel" style="text-align: center; padding: 2rem;">
+                            <h2>Erro de Conexão</h2>
+                            <p>Não foi possível conectar aos serviços do banco.</p>
+                            <p>Por favor, verifique sua conexão com a internet e tente novamente.</p>
+                            <button class="btn btn-primary" onclick="location.reload()">
+                                <i data-lucide="refresh-cw"></i> Tentar Novamente
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+    </script>
+    
+    <!-- Main Application Logic -->
+    <script src="utils.js"></script>
+    <script src="auth.js"></script>
+    <script src="dashboard.js"></script>
+    <script src="transactions.js"></script>
+    <script src="cards.js"></script>
+    <script src="investments.js"></script>
+    <script src="games.js"></script>
+    <script src="store.js"></script>
+    <script src="settings.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

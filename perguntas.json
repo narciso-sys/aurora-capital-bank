@@ -1,0 +1,50 @@
+[
+  {
+    "category": "Finanças Pessoais",
+    "type": "multiple",
+    "difficulty": "easy",
+    "question": "O que é um orçamento pessoal?",
+    "correct_answer": "Um plano para gerenciar receitas e despesas",
+    "incorrect_answers": [
+      "Um tipo de investimento de alto risco",
+      "Um empréstimo para educação",
+      "Uma conta poupança especial"
+    ]
+  },
+  {
+    "category": "Investimentos",
+    "type": "multiple",
+    "difficulty": "medium",
+    "question": "O que significa a diversificação em investimentos?",
+    "correct_answer": "Distribuir o dinheiro em diferentes tipos de aplicações para reduzir riscos",
+    "incorrect_answers": [
+      "Investir todo o dinheiro em uma única ação promissora",
+      "Aplicar apenas em poupança",
+      "Comprar vários imóveis na mesma região"
+    ]
+  },
+  {
+    "category": "Crédito",
+    "type": "multiple",
+    "difficulty": "easy",
+    "question": "Qual é a principal função de um cartão de crédito?",
+    "correct_answer": "Permitir compras a prazo, pagando depois",
+    "incorrect_answers": [
+      "Dar dinheiro infinito",
+      "Funcionar como um cartão de débito",
+      "Apenas para levantamentos"
+    ]
+  },
+  {
+    "category": "Economia",
+    "type": "multiple",
+    "difficulty": "hard",
+    "question": "O que é a inflação?",
+    "correct_answer": "O aumento geral dos preços, diminuindo o poder de compra",
+    "incorrect_answers": [
+      "O aumento do valor do dinheiro",
+      "Uma taxa de juro do banco",
+      "Um imposto sobre vendas"
+    ]
+  }
+]
