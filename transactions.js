@@ -217,49 +217,51 @@ async function handleTransfer(e) {
             return;
         }
         
-        // Gerar IDs de transação
+        // Gerar IDs de transação (SANITIZADOS)
         const senderTxId = generateUniqueId('tx');
         const recipientTxId = generateUniqueId('tx');
         const timestamp = Date.now();
-        
-        // Atualizar dados do remetente
-        const senderUpdate = {
-            [`transactions/${senderTxId}`]: {
-                type: 'transfer_out',
-                amount: amount,
-                recipient: recipientEmail || recipientIban,
-                recipientName: recipientEmail ? recipientEmail.split('@')[0] : recipientIban,
-                timestamp: timestamp,
-                status: 'completed'
-            },
-            balance: currentUser.balance - amount
+
+        // ⚠️ CORREÇÃO PRINCIPAL: NÃO usar chaves com "/" dentro dos objetos senderUpdate/recipientUpdate
+        // Em vez disso, definir caminhos COMPLETOS diretamente no objeto "updates"
+
+        const updates = {};
+
+        // Caminho completo para a transação do remetente
+        updates[`users/${currentUser.uid}/transactions/${senderTxId}`] = {
+            type: 'transfer_out',
+            amount: amount,
+            recipient: recipientEmail || recipientIban,
+            recipientName: recipientEmail ? recipientEmail.split('@')[0] : recipientIban,
+            timestamp: timestamp,
+            status: 'completed'
         };
-        
-        // Atualizar dados do destinatário
+
+        // Atualizar saldo do remetente
+        updates[`users/${currentUser.uid}/balance`] = currentUser.balance - amount;
+
+        // Caminho completo para a transação do destinatário
         const recipientRef = window.firebase.dbFunc.ref(window.firebase.db, `users/${recipientUid}`);
         const recipientSnapshot = await window.firebase.dbFunc.get(recipientRef);
         if (!recipientSnapshot.exists()) {
             throw new Error("Destinatário não encontrado");
         }
-        
+
         const recipientData = recipientSnapshot.val();
-        const recipientUpdate = {
-            [`transactions/${recipientTxId}`]: {
-                type: 'transfer_in',
-                amount: amount,
-                sender: currentUser.email,
-                senderName: currentUser.username,
-                timestamp: timestamp,
-                status: 'completed'
-            },
-            balance: (recipientData.balance || 0) + amount
+
+        updates[`users/${recipientUid}/transactions/${recipientTxId}`] = {
+            type: 'transfer_in',
+            amount: amount,
+            sender: currentUser.email,
+            senderName: currentUser.username,
+            timestamp: timestamp,
+            status: 'completed'
         };
-        
-        // Executar atualizações em lote
-        const updates = {};
-        updates[`users/${currentUser.uid}`] = senderUpdate;
-        updates[`users/${recipientUid}`] = recipientUpdate;
-        
+
+        // Atualizar saldo do destinatário
+        updates[`users/${recipientUid}/balance`] = (recipientData.balance || 0) + amount;
+
+        // Executar atualizações em lote — agora com chaves válidas
         await window.firebase.dbFunc.update(window.firebase.dbFunc.ref(window.firebase.db), updates);
         
         showToast(`Transferência de ${formatCurrency(amount)} realizada com sucesso!`, "success");
@@ -350,7 +352,9 @@ function renderTransactionList() {
     lucide.createIcons();
 }
 
-// Função utilitária para gerar ID único
+// Função utilitária para gerar ID único — SANITIZADO
 function generateUniqueId(prefix) {
-    return `${prefix}-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    const id = `${prefix}-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    // Remove caracteres inválidos do Firebase
+    return id.replace(/[.#$\/[\]]/g, '_');
 }
