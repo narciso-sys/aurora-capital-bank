@@ -112,7 +112,76 @@ function generateUniqueId(prefix) {
     return `${prefix}-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 }
 
-// Assistente IA (Gemini)
+// 🆕 INTEGRAÇÃO REAL COM GEMINI API
+// ⚠️ AVISO DE SEGURANÇA: Manter a chave da API aqui no código do frontend (client-side)
+// não é seguro. Qualquer pessoa que visitar seu site pode ver sua chave e usá-la.
+// O ideal é criar um backend (ex: uma Cloud Function ou um endpoint no seu servidor)
+// que recebe a pergunta do seu site, adiciona a chave de forma segura no servidor,
+// chama a API do Gemini e retorna a resposta para o site.
+const GEMINI_API_KEY = 'AIzaSyBJWm9ACIgM0efSACS5pmrGy-IMQI7t7hI'; // <-- 🔑 INSIRA SUA CHAVE AQUI
+const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`;
+
+async function callGeminiAPI(prompt, context = "") {
+    if (!GEMINI_API_KEY || GEMINI_API_KEY === 'AIzaSyBJWm9ACIgM0efSACS5pmrGy-IMQI7t7hI') {
+        throw new Error("Chave da API do Gemini não configurada. Por favor, insira sua chave real no código.");
+    }
+
+    const fullPrompt = `
+Você é Aurora, a assistente financeira virtual do Banco Aurora.
+Responda de forma clara, direta e amigável, sempre em português.
+Use no máximo 2 frases curtas. Seja prática e útil.
+
+Contexto do usuário:
+${context}
+
+Pergunta do usuário:
+${prompt}
+    `.trim();
+
+    try {
+        const response = await fetch(GEMINI_API_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                contents: [{
+                    parts: [{
+                        text: fullPrompt
+                    }]
+                }],
+                generationConfig: {
+                    maxOutputTokens: 500,
+                    temperature: 0.7,
+                    topP: 0.95,
+                    topK: 40
+                }
+            })
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            console.error('Erro da API Gemini:', errorData);
+            throw new Error(`Erro Gemini: ${errorData.error?.message || 'Erro desconhecido ao contatar a IA.'}`);
+        }
+
+        const data = await response.json();
+        
+        if (!data.candidates || data.candidates.length === 0) {
+            // Isso pode acontecer se o conteúdo for bloqueado por segurança
+            console.warn('API Gemini retornou sem candidatos. Verifique o prompt e as configurações de segurança.');
+            return "Não consegui gerar uma resposta para isso. Tente perguntar de outra forma.";
+        }
+        
+        return data.candidates[0].content.parts[0].text.trim();
+    } catch (error) {
+        console.error("Erro ao chamar Gemini API:", error);
+        throw error; // Re-lança o erro para ser pego por handleAIChatSubmit
+    }
+}
+
+
+// Assistente IA (Gemini) — INTEGRADO REAL
 function openAIAssistant() {
     const modalContent = `
         <div class="ai-chat-window">
@@ -122,49 +191,72 @@ function openAIAssistant() {
             <form class="ai-input-form" id="ai-input-form">
                 <div class="input-group">
                     <i data-lucide="message-circle"></i>
-                    <input type="text" id="ai-user-input" placeholder="Pergunte sobre suas finanças..." required>
+                    <input type="text" id="ai-user-input" placeholder="Pergunte sobre suas finanças..." required autocomplete="off">
                 </div>
                 <button type="submit" class="btn btn-primary"><i data-lucide="send"></i></button>
             </form>
         </div>
     `;
     createModal({ text: 'Assistente Aurora IA', icon: 'sparkles' }, modalContent, []);
+    lucide.createIcons();
     document.getElementById('ai-input-form').addEventListener('submit', handleAIChatSubmit);
+    document.getElementById('ai-user-input').focus();
 }
 
-function handleAIChatSubmit(e) {
+async function handleAIChatSubmit(e) {
     e.preventDefault();
     const input = document.getElementById('ai-user-input');
+    const submitButton = e.target.querySelector('button[type="submit"]');
     const message = input.value.trim();
     if (!message) return;
 
+    // Desabilitar o formulário enquanto processa
+    input.disabled = true;
+    submitButton.disabled = true;
+
     const messagesContainer = document.getElementById('ai-messages');
-    messagesContainer.innerHTML += `<div class="ai-message user">${message}</div>`;
+    messagesContainer.innerHTML += `<div class="ai-message user">${escapeHtml(message)}</div>`;
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
     input.value = '';
 
-    // Simulação da resposta da IA
-    setTimeout(() => {
-        const response = getGeminiResponse(message);
-        messagesContainer.innerHTML += `<div class="ai-message bot">${response}</div>`;
+    // Mostrar "digitando..."
+    const thinkingElement = document.createElement('div');
+    thinkingElement.className = 'ai-message bot';
+    thinkingElement.innerHTML = '<i data-lucide="loader" class="spin-icon"></i> Pensando...';
+    messagesContainer.appendChild(thinkingElement);
+    lucide.createIcons();
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+    try {
+        const { currentUser } = window.authManager || {};
+        const context = currentUser ? `
+- Nome: ${currentUser.username}
+- Saldo: ${formatCurrency(currentUser.balance)}
+- Saldo de jogos: ${formatCurrency(currentUser.gameBalance || 0)}
+- Cartões: ${Object.keys(currentUser.cards || {}).length}
+- IBAN: ${currentUser.iban}
+- PIX: ${currentUser.email}
+        `.trim() : "Usuário não autenticado.";
+
+        const response = await callGeminiAPI(message, context);
+
+        // Substituir "digitando..." pela resposta real
+        thinkingElement.innerHTML = escapeHtml(response);
+    } catch (error) {
+        console.error("Erro ao obter resposta da IA:", error);
+        thinkingElement.innerHTML = `❌ ${escapeHtml(error.message) || "Erro ao processar sua pergunta. Tente novamente."}`;
+    } finally {
+        // Habilitar o formulário novamente
+        input.disabled = false;
+        submitButton.disabled = false;
+        input.focus();
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
-    }, 1500);
+    }
 }
 
-function getGeminiResponse(prompt) {
-    const p = prompt.toLowerCase();
-    const { currentUser } = window.authManager;
-
-    if (p.includes('saldo')) return `Seu saldo atual é de ${formatCurrency(currentUser.balance)}. Você também tem ${formatCurrency(currentUser.gameBalance || 0)} em saldo de jogos que pode resgatar.`;
-    if (p.includes('investimento')) return "Investir é uma ótima forma de fazer seu dinheiro crescer. Recomendo que comece por analisar nossos fundos na seção de 'Investimentos' e escolha um que se alinhe com seu perfil de risco. O Fundo Conservador é ideal para iniciantes!";
-    if (p.includes('cartão') || p.includes('cartões')) return `Você possui ${Object.keys(currentUser.cards || {}).length} cartões. Pode geri-los, ver detalhes ou adquirir novos na seção 'Cartões'. O cartão Aurora Onyx é gratuito e já está disponível para você!`;
-    if (p.includes('poupar') || p.includes('economizar')) return "Uma boa dica para poupar é a regra 50/30/20: 50% do seu rendimento para necessidades, 30% para desejos e 20% para poupanças e investimentos. Que tal começar definindo metas de poupança?";
-    if (p.includes('transferir') || p.includes('enviar')) return "Para transferir dinheiro, vá à seção 'Transações', insira a chave PIX (seu email) ou IBAN do destinatário e o valor. A transferência é instantânea e segura!";
-    if (p.includes('jogo') || p.includes('quiz')) return "Na seção 'Jogos & Recompensas', você pode participar do Quiz Financeiro e ganhar até A$ 3.000,00 em saldo de jogos! É divertido, educativo e você pode resgatar o saldo a qualquer momento.";
-    if (p.includes('loja') || p.includes('produtos')) return "Na Loja Aurora, você pode comprar produtos como e-books, webinars e consultas financeiras usando seu saldo principal. Temos mais de 30 produtos diferentes para ajudar você a melhorar sua educação financeira!";
-    if (p.includes('pix') || p.includes('iban')) return `Sua chave PIX é: ${currentUser.email}. Seu IBAN é: ${currentUser.iban}. Você pode copiar ambos na seção de 'Configurações'. Para transferir para outro usuário, basta colar a chave PIX ou IBAN dele no campo correspondente.`;
-    if (p.includes('tema') || p.includes('escuro') || p.includes('claro')) return "Você pode mudar o tema entre claro e escuro na seção de 'Configurações'. Basta clicar no interruptor de tema e sua preferência será salva automaticamente!";
-    if (p.includes('ajuda') || p.includes('suporte')) return "Estou aqui para ajudar! Você também pode entrar em contato com nosso suporte através do email suporte@aurora.capital ou pelo telefone +244 900 000 000.";
-    
-    return "Não tenho certeza de como responder a isso. Pode tentar reformular sua pergunta? Sou especialista em questões sobre saldos, transações, investimentos, cartões, jogos, dicas de poupança e configurações da conta.";
+// Função auxiliar para escapar HTML (segurança contra XSS)
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
 }
