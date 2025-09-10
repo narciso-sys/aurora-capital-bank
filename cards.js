@@ -1,4 +1,9 @@
+// ======================
+// TIPOS DE CARTÕES (25 NOVOS + 15 ANTIGOS = 25 TOTAL)
+// ======================
+
 const CARD_TYPES = {
+    // === CARTÕES EXISTENTES (15) ===
     onyx: { 
         name: 'Aurora Onyx', 
         price: 0, 
@@ -8,7 +13,8 @@ const CARD_TYPES = {
         benefits: "Compra segura, proteção contra fraudes, aceito em todos os sites Aurora",
         tier: "Básico",
         cashback: 0,
-        perks: []
+        perks: [],
+        network: "visa"
     },
     cobalt: { 
         name: 'Aurora Cobalt', 
@@ -19,7 +25,8 @@ const CARD_TYPES = {
         benefits: "Compra segura, proteção contra fraudes, cashback de 1% em compras, seguro de compra",
         tier: "Bronze",
         cashback: 1,
-        perks: ["Seguro de Compra", "Cashback 1%"]
+        perks: ["Seguro de Compra", "Cashback 1%"],
+        network: "visa"
     },
     amber: { 
         name: 'Aurora Amber', 
@@ -30,7 +37,8 @@ const CARD_TYPES = {
         benefits: "Compra segura, proteção contra fraudes, cashback de 2% em compras, seguro de viagem nacional, acesso a eventos exclusivos",
         tier: "Prata",
         cashback: 2,
-        perks: ["Seguro Viagem Nacional", "Cashback 2%", "Eventos Exclusivos"]
+        perks: ["Seguro Viagem Nacional", "Cashback 2%", "Eventos Exclusivos"],
+        network: "mastercard"
     },
     ruby: { 
         name: 'Aurora Ruby', 
@@ -41,7 +49,8 @@ const CARD_TYPES = {
         benefits: "Compra segura, proteção contra fraudes, cashback de 3% em compras, seguro de viagem internacional, acesso a salas VIP, concierge básico",
         tier: "Ouro",
         cashback: 3,
-        perks: ["Seguro Viagem Internacional", "Cashback 3%", "Salas VIP Aeroportos", "Concierge Básico"]
+        perks: ["Seguro Viagem Internacional", "Cashback 3%", "Salas VIP Aeroportos", "Concierge Básico"],
+        network: "amex"
     },
     aurora: { 
         name: 'Aurora Borealis', 
@@ -52,7 +61,8 @@ const CARD_TYPES = {
         benefits: "Compra segura, proteção contra fraudes, cashback de 5% em compras, seguro de viagem premium, acesso ilimitado a salas VIP, concierge 24/7, resgate de pontos em dobro",
         tier: "Platina",
         cashback: 5,
-        perks: ["Seguro Viagem Premium", "Cashback 5%", "Salas VIP Ilimitadas", "Concierge 24/7", "Resgate em Dobro"]
+        perks: ["Seguro Viagem Premium", "Cashback 5%", "Salas VIP Ilimitadas", "Concierge 24/7", "Resgate em Dobro"],
+        network: "visa"
     },
     obsidian: {
         name: 'Aurora Obsidian',
@@ -63,7 +73,8 @@ const CARD_TYPES = {
         benefits: "Cashback 7%, seguro saúde emergencial, traslado aeroportuário, gerente pessoal, convites para lançamentos globais",
         tier: "Diamante",
         cashback: 7,
-        perks: ["Cashback 7%", "Seguro Saúde Emergencial", "Traslado Aeroportuário", "Gerente Pessoal", "Lançamentos Globais"]
+        perks: ["Cashback 7%", "Seguro Saúde Emergencial", "Traslado Aeroportuário", "Gerente Pessoal", "Lançamentos Globais"],
+        network: "mastercard"
     },
     titanium: {
         name: 'Aurora Titanium',
@@ -74,7 +85,8 @@ const CARD_TYPES = {
         benefits: "Cashback 2.5%, seguro de equipamentos eletrônicos, descontos em parceiros, suporte prioritário",
         tier: "Titânio",
         cashback: 2.5,
-        perks: ["Cashback 2.5%", "Seguro Eletrônicos", "Descontos Parceiros", "Suporte Prioritário"]
+        perks: ["Cashback 2.5%", "Seguro Eletrônicos", "Descontos Parceiros", "Suporte Prioritário"],
+        network: "visa"
     },
     emerald: {
         name: 'Aurora Emerald',
@@ -85,7 +97,8 @@ const CARD_TYPES = {
         benefits: "Cashback 3.5%, doações automáticas para causas ambientais, carbono neutro nas compras, lounge ecológico",
         tier: "Esmeralda",
         cashback: 3.5,
-        perks: ["Cashback 3.5%", "Causas Ambientais", "Carbono Neutro", "Lounge Ecológico"]
+        perks: ["Cashback 3.5%", "Causas Ambientais", "Carbono Neutro", "Lounge Ecológico"],
+        network: "unionpay"
     },
     sapphire: {
         name: 'Aurora Sapphire',
@@ -96,7 +109,8 @@ const CARD_TYPES = {
         benefits: "Cashback 4.5%, upgrade automático em voos, hospedagem grátis em hotéis parceiros, experiências gastronômicas",
         tier: "Safira",
         cashback: 4.5,
-        perks: ["Cashback 4.5%", "Upgrade Voos", "Hospedagem Grátis", "Experiências Gastronômicas"]
+        perks: ["Cashback 4.5%", "Upgrade Voos", "Hospedagem Grátis", "Experiências Gastronômicas"],
+        network: "diners"
     },
     eclipse: {
         name: 'Aurora Eclipse',
@@ -107,7 +121,8 @@ const CARD_TYPES = {
         benefits: "Cashback 10%, jatinho privado (simulação), ilha privada (virtual), consultoria financeira global, NFT exclusivo",
         tier: "Eclipse",
         cashback: 10,
-        perks: ["Cashback 10%", "Jatinho Virtual", "Ilha Virtual", "Consultoria Global", "NFT Exclusivo"]
+        perks: ["Cashback 10%", "Jatinho Virtual", "Ilha Virtual", "Consultoria Global", "NFT Exclusivo"],
+        network: "amex"
     },
     celestial: {
         name: 'Aurora Celestial',
@@ -118,7 +133,8 @@ const CARD_TYPES = {
         benefits: "Cashback 12%, acesso a IPOs privados, consultoria de family office, gerente dedicado 24/7, jatinho real (1 voo/mês)",
         tier: "CELESTIAL",
         cashback: 12,
-        perks: ["Cashback 12%", "IPOs Privados", "Family Office", "Gerente 24/7", "Jatinho Real Mensal"]
+        perks: ["Cashback 12%", "IPOs Privados", "Family Office", "Gerente 24/7", "Jatinho Real Mensal"],
+        network: "mastercard"
     },
     infinity: {
         name: 'Aurora Infinity',
@@ -129,7 +145,8 @@ const CARD_TYPES = {
         benefits: "Cashback 15%, crédito ilimitado, ilha real (uso 1 semana/ano), time de advogados globais, NFTs de obras-primas",
         tier: "INFINITY",
         cashback: 15,
-        perks: ["Cashback 15%", "Crédito Ilimitado", "Ilha Real Anual", "Advogados Globais", "NFTs de Obras-Primas"]
+        perks: ["Cashback 15%", "Crédito Ilimitado", "Ilha Real Anual", "Advogados Globais", "NFTs de Obras-Primas"],
+        network: "visa"
     },
     quantum: {
         name: 'Aurora Quantum',
@@ -140,7 +157,8 @@ const CARD_TYPES = {
         benefits: "Cashback 18%, IA preditiva de mercado, hedge automático, acesso a laboratórios quânticos, consultoria de Nobel em Economia",
         tier: "QUANTUM",
         cashback: 18,
-        perks: ["Cashback 18%", "IA Preditiva", "Hedge Automático", "Lab Quântico", "Consultoria Nobel"]
+        perks: ["Cashback 18%", "IA Preditiva", "Hedge Automático", "Lab Quântico", "Consultoria Nobel"],
+        network: "amex"
     },
     apex: {
         name: 'Aurora Apex',
@@ -151,7 +169,8 @@ const CARD_TYPES = {
         benefits: "Cashback 20%, emissão de moeda própria, veto em políticas do banco, cofre em Fort Knox, embaixador pessoal da ONU",
         tier: "APEX",
         cashback: 20,
-        perks: ["Cashback 20%", "Moeda Própria", "Veto Bancário", "Cofre Fort Knox", "Embaixador ONU"]
+        perks: ["Cashback 20%", "Moeda Própria", "Veto Bancário", "Cofre Fort Knox", "Embaixador ONU"],
+        network: "mastercard"
     },
     omnissiah: {
         name: 'Aurora Omnissiah',
@@ -162,11 +181,134 @@ const CARD_TYPES = {
         benefits: "Cashback 25%, controle acionário do Aurora Bank, direito a nomear CEO, satélite dedicado, residência em bunker anti-apocalipse",
         tier: "OMNISSIAH",
         cashback: 25,
-        perks: ["Cashback 25%", "Controle do Banco", "Nomear CEO", "Satélite Pessoal", "Bunker Anti-Apocalipse"]
+        perks: ["Cashback 25%", "Controle do Banco", "Nomear CEO", "Satélite Pessoal", "Bunker Anti-Apocalipse"],
+        network: "visa"
+    },
+
+    // === NOVOS 10 CARTÕES ULTRA-PREMIUM ===
+    mastercard_black: {
+        name: 'Mastercard Black Quantum',
+        price: 3500000,
+        description: 'O cartão Mastercard mais exclusivo do planeta.',
+        designClass: 'card-mastercard-black',
+        color: '#000000',
+        benefits: "Cashback 30%, acesso a ilhas privadas reais, concierge global 24/7, jatinho particular ilimitado",
+        tier: "BLACK QUANTUM",
+        cashback: 30,
+        perks: ["Cashback 30%", "Ilhas Reais", "Concierge Global", "Jatinho Ilimitado", "Cartão de Titânio"],
+        network: "mastercard"
+    },
+    amex_centurion: {
+        name: 'American Express Centurion',
+        price: 5000000,
+        description: 'O lendário cartão preto — por convite apenas.',
+        designClass: 'card-amex-centurion',
+        color: '#00008b',
+        benefits: "Cashback 35%, acesso a lounges globais, gerente pessoal, resgate de milhas ilimitado",
+        tier: "CENTURION",
+        cashback: 35,
+        perks: ["Cashback 35%", "Lounge Global", "Gerente Pessoal", "Milhas Ilimitadas", "Convite Exclusivo"],
+        network: "amex"
+    },
+    unionpay_dragon: {
+        name: 'UnionPay Dragon Emperor',
+        price: 7000000,
+        description: 'Poder oriental em forma de cartão — aceito em toda Ásia.',
+        designClass: 'card-unionpay-dragon',
+        color: '#c3272b',
+        benefits: "Cashback 40%, consultoria imperial, acesso a palácios, tradução simultânea em 50 idiomas",
+        tier: "DRAGON EMPEROR",
+        cashback: 40,
+        perks: ["Cashback 40%", "Consultoria Imperial", "Acesso a Palácios", "Tradução 50 Idiomas", "VIP China"],
+        network: "unionpay"
+    },
+    diners_reserve: {
+        name: 'Diners Club Reserve',
+        price: 4500000,
+        description: 'Exclusividade gastronômica e experiências únicas.',
+        designClass: 'card-diners-reserve',
+        color: '#0066b3',
+        benefits: "Cashback 28%, jantares com chefs Michelin, ingressos para festivais, wine tasting privado",
+        tier: "RESERVE",
+        cashback: 28,
+        perks: ["Cashback 28%", "Jantares Michelin", "Festivais Exclusivos", "Wine Tasting", "Reservas VIP"],
+        network: "diners"
+    },
+    jcb_platinum: {
+        name: 'JCB The Platinum',
+        price: 4000000,
+        description: 'Elegância japonesa e tecnologia de ponta.',
+        designClass: 'card-jcb-platinum',
+        color: '#ffd700',
+        benefits: "Cashback 32%, spas premium, tecnologia antifraude quântica, tradutor IA em tempo real",
+        tier: "PLATINUM",
+        cashback: 32,
+        perks: ["Cashback 32%", "Spas Premium", "Antifraude Quântico", "Tradutor IA", "VIP Japão"],
+        network: "jcb"
+    },
+    discover_ultimate: {
+        name: 'Discover Ultimate',
+        price: 3200000,
+        description: 'Cashback máximo e proteção total em todas as compras.',
+        designClass: 'card-discover-ultimate',
+        color: '#ff6600',
+        benefits: "Cashback 45%, proteção de preço, devolução sem perguntas, cashback dobrado no primeiro ano",
+        tier: "ULTIMATE",
+        cashback: 45,
+        perks: ["Cashback 45%", "Proteção de Preço", "Devolução Sem Perguntas", "Cashback Dobrado", "Sem Anuidade"],
+        network: "discover"
+    },
+    elo_supremo: {
+        name: 'Elo Supremo',
+        price: 2800000,
+        description: 'O ápice do cartão brasileiro — benefícios locais e globais.',
+        designClass: 'card-elo-supremo',
+        color: '#009739',
+        benefits: "Cashback 27%, acesso a eventos no Brasil, cashback em combustível, parceiros exclusivos LATAM",
+        tier: "SUPREMO",
+        cashback: 27,
+        perks: ["Cashback 27%", "Eventos Brasil", "Combustível", "Parceiros LATAM", "VIP Samba"],
+        network: "elo"
+    },
+    ru_pay_premier: {
+        name: 'RuPay Premier',
+        price: 3100000,
+        description: 'Cartão indiano de elite — benefícios culturais e espirituais.',
+        designClass: 'card-rupay-premier',
+        color: '#ff9933',
+        benefits: "Cashback 33%, ioga privada, retiros espirituais, massagem ayurvédica mensal",
+        tier: "PREMIER",
+        cashback: 33,
+        perks: ["Cashback 33%", "Ioga Privada", "Retiros Espirituais", "Ayurveda Mensal", "Templos VIP"],
+        network: "rupay"
+    },
+    mir_infinity: {
+        name: 'Mir Infinity',
+        price: 3800000,
+        description: 'Cartão russo de elite — benefícios em toda Eurásia.',
+        designClass: 'card-mir-infinity',
+        color: '#0033aa',
+        benefits: "Cashback 36%, trens privados, caviar mensal, babushka concierge",
+        tier: "INFINITY",
+        cashback: 36,
+        perks: ["Cashback 36%", "Trens Privados", "Caviar Mensal", "Babushka Concierge", "VIP Sibéria"],
+        network: "mir"
+    },
+    hipercard_elite: {
+        name: 'Hipercard Elite',
+        price: 2600000,
+        description: 'O cartão brasileiro mais poderoso — benefícios em todo o Nordeste e além.',
+        designClass: 'card-hipercard-elite',
+        color: '#8b0000',
+        benefits: "Cashback 26%, camarote em festivais, descontos em resorts, cashback em restaurantes locais",
+        tier: "ELITE",
+        cashback: 26,
+        perks: ["Cashback 26%", "Camarote Festivais", "Resorts", "Restaurantes Locais", "VIP Nordeste"],
+        network: "hipercard"
     }
 };
 
-const MAX_CARDS = 15;
+const MAX_CARDS = 25;
 
 // ======================
 // TRATAMENTO DE ERROS
@@ -206,14 +348,14 @@ function renderCards() {
             <div class="page-container">
                 <div class="glass-panel">
                     <h3>Meus Cartões Aurora</h3>
-                    <div class="card-carousel-wrapper" style="position: relative; padding: 20px 0;">
+                    <div class="card-carousel-wrapper" style="position: relative; padding: 30px 0; overflow: visible;">
                         <button class="carousel-nav-btn left" aria-label="Cartão anterior" tabindex="0">
                             <i data-lucide="chevron-left"></i>
                         </button>
                         <div class="card-carousel" id="card-carousel" role="region" aria-label="Carrossel de cartões">
                             ${Object.keys(userCards).length > 0 
                                 ? Object.keys(userCards).map(cardType => renderVirtualCard(cardType)).join('')
-                                : '<div class="no-cards-message" style="text-align: center; padding: 3rem;"><i data-lucide="credit-card" style="font-size: 3rem; margin-bottom: 1rem;"></i><p>Você ainda não possui cartões.</p><p>Adquira seu primeiro cartão gratuitamente!</p></div>'
+                                : '<div class="no-cards-message" style="text-align: center; padding: 4rem;"><i data-lucide="credit-card" style="font-size: 4rem; margin-bottom: 1.5rem; color: var(--text-secondary);"></i><p style="font-size: 1.2rem; margin-bottom: 1rem;">Você ainda não possui cartões.</p><p>Adquira seu primeiro cartão gratuitamente!</p></div>'
                             }
                         </div>
                         <button class="carousel-nav-btn right" aria-label="Próximo cartão" tabindex="0">
@@ -224,31 +366,34 @@ function renderCards() {
                 </div>
                 <div class="glass-panel">
                     <h3>Adquirir Novos Cartões</h3>
-                    <div class="quick-actions-grid" style="grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem;">
+                    <div class="quick-actions-grid" style="grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2rem; padding: 1rem 0;">
                         ${Object.entries(CARD_TYPES).map(([type, details]) => {
                             const isOwned = !!userCards[type];
                             const canAfford = currentUser.balance >= details.price;
                             return `
                                 <div class="action-card-container" style="position: relative;">
-                                    <div class="action-btn card-action-btn ${isOwned || !canAfford ? 'disabled-card' : ''}" style="flex-direction: column; align-items: stretch; text-align: center; padding: 1.5rem; border-radius: 16px; transition: all 0.3s ease; ${isOwned || !canAfford ? 'filter: grayscale(60%) opacity(0.8);' : 'box-shadow: 0 8px 24px rgba(0,0,0,0.1);'}">
-                                        <div class="card-preview ${details.designClass}" style="width: 100%; height: 140px; border-radius: 12px; margin-bottom: 1rem; background: linear-gradient(135deg, ${details.color} 0%, ${shadeColor(details.color, -25)} 100%); display: flex; flex-direction: column; justify-content: space-between; padding: 1rem; color: white; position: relative; overflow: hidden;">
-                                            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                                                <div class="card-logo" style="font-weight: 800; font-size: 1.2rem;">AURORA</div>
-                                                <div style="font-size: 0.8rem; text-align: right;">${details.tier}</div>
-                                            </div>
-                                            <div style="font-size: 0.9rem; font-weight: 600; text-align: center;">${details.name}</div>
-                                            <div style="display: flex; justify-content: space-between; align-items: flex-end; font-size: 0.8rem;">
-                                                <div>CASHBACK ${details.cashback}%</div>
+                                    <div class="action-btn card-action-btn ${isOwned || !canAfford ? 'disabled-card' : ''}" style="flex-direction: column; align-items: stretch; text-align: center; padding: 1.8rem; border-radius: 20px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); ${isOwned || !canAfford ? 'filter: grayscale(70%) opacity(0.7); transform: scale(0.98);' : 'box-shadow: 0 12px 30px rgba(0,0,0,0.15); transform: scale(1);'} background: linear-gradient(145deg, ${details.color} 0%, ${shadeColor(details.color, -30)} 100%); color: white;">
+                                        <div class="card-preview ${details.designClass}" style="width: 100%; height: 160px; border-radius: 16px; margin-bottom: 1.2rem; background: linear-gradient(135deg, ${details.color} 0%, ${shadeColor(details.color, -40)} 100%); display: flex; flex-direction: column; justify-content: space-between; padding: 1.2rem; color: white; position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.2);">
+                                            <!-- Rede -->
+                                            ${getNetworkSVG(details.network)}
+                                            
+                                            <!-- Tier -->
+                                            <div style="font-size: 0.85rem; text-align: right; font-weight: 700; text-shadow: 0 1px 2px rgba(0,0,0,0.3);">${details.tier}</div>
+                                            
+                                            <div style="font-size: 1rem; font-weight: 800; text-align: center; letter-spacing: 0.5px; margin: 0.5rem 0;">${details.name}</div>
+                                            
+                                            <div style="display: flex; justify-content: space-between; align-items: flex-end; font-size: 0.85rem;">
+                                                <div style="font-weight: 600;">CASHBACK ${details.cashback}%</div>
                                                 <div>💳</div>
                                             </div>
                                         </div>
-                                        <span style="font-size: 1.3rem; font-weight: 700; margin: 0.5rem 0;">${details.name}</span>
-                                        <small style="color: var(--text-secondary); margin-bottom: 0.5rem;">${details.description}</small>
-                                        <div style="margin: 0.75rem 0; padding: 0.5rem; background: var(--surface); border-radius: 8px; font-size: 0.9rem;">
-                                            <strong>Benefícios:</strong><br>
+                                        <span style="font-size: 1.4rem; font-weight: 800; margin: 0.8rem 0; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">${details.name}</span>
+                                        <small style="color: rgba(255,255,255,0.9); margin-bottom: 1rem; line-height: 1.4;">${details.description}</small>
+                                        <div style="margin: 1rem 0; padding: 0.8rem; background: rgba(0,0,0,0.2); backdrop-filter: blur(10px); border-radius: 12px; font-size: 0.95rem; border: 1px solid rgba(255,255,255,0.1);">
+                                            <strong style="color: white;">Benefícios:</strong><br>
                                             ${details.perks.map(p => `• ${p}`).join('<br>')}
                                         </div>
-                                        <strong style="margin: 1rem 0; font-size: 1.2rem; color: var(--primary);">${formatCurrency(details.price)}</strong>
+                                        <strong style="margin: 1.2rem 0; font-size: 1.4rem; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">${formatCurrency(details.price)}</strong>
                                         <button class="btn ${isOwned ? 'btn-secondary' : 'btn-primary'}" ${isOwned || !canAfford ? 'disabled' : ''} onclick="handleBuyCard('${type}')">
                                             ${isOwned ? 'Já Possui' : (canAfford ? 'Adquirir Agora' : 'Saldo Insuficiente')}
                                         </button>
@@ -264,12 +409,64 @@ function renderCards() {
         lucide.createIcons();
         setTimeout(() => {
             setupCardCarousel();
+            setupCardHoverEffects();
             setupCarouselAccessibility();
         }, 100);
 
     } catch (err) {
         handleError(err, "renderCards");
     }
+}
+
+// ======================
+// EFEITOS 3D: ZOOM, ROTAÇÃO, PARALLAX
+// ======================
+
+function setupCardHoverEffects() {
+    const cards = document.querySelectorAll('.virtual-card, .card-preview');
+    cards.forEach(card => {
+        let isHovered = false;
+
+        card.addEventListener('mouseenter', () => {
+            isHovered = true;
+            gsap.to(card, {
+                scale: 1.05,
+                rotationY: 5,
+                rotationX: 5,
+                duration: 0.6,
+                ease: "power2.out"
+            });
+        });
+
+        card.addEventListener('mousemove', (e) => {
+            if (!isHovered) return;
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            const rotateX = (y - centerY) / 10;
+            const rotateY = (centerX - x) / 10;
+
+            gsap.to(card, {
+                rotationY: rotateY,
+                rotationX: -rotateX,
+                duration: 0.5,
+                ease: "power1.out"
+            });
+        });
+
+        card.addEventListener('mouseleave', () => {
+            isHovered = false;
+            gsap.to(card, {
+                scale: 1,
+                rotationY: 0,
+                rotationX: 0,
+                duration: 0.6,
+                ease: "elastic.out(1, 0.3)"
+            });
+        });
+    });
 }
 
 // ======================
@@ -293,43 +490,43 @@ function renderVirtualCard(cardType) {
         const cardNumber = cardData.cardNumber || generateCardNumber(currentUser.uid, cardType);
         const expiryDate = cardData.expiryDate || generateExpiryDate();
         const cvv = cardData.cvv || generateCVV();
-        
-        // ✅ SVG VISA FUNCIONAL (EMBEDDED, NÃO BASE64)
-        const visaSVG = `
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 64" width="48" height="30" aria-label="Visa">
-                <path fill="#fff" d="M146.8,25.5v-7.4h-7.5c-2.3,0-4.1,1.1-4.1,3.5c0,1.7,1.1,2.7,3.2,3L146.8,25.5z M159.3,37.1l-4.8-21.9h-7.5l4.9,21.9H159.3z M119.1,37.1l-5.4-21.9h-7.4l5.4,21.9H119.1z M98.6,15.2h-7.5v21.9h7.5V15.2z M76.2,15.2h-7.5v21.9h7.5V15.2z M53.8,15.2h-7.5v21.9h7.5V15.2z M31.4,15.2h-7.5v21.9h7.5V15.2z"/>
-            </svg>
-        `;
 
         return `
-            <div class="virtual-card ${cardConfig.designClass}" tabindex="0" role="button" aria-label="Cartão ${cardConfig.name}" onclick="showCardDetails('${cardType}', '${cardNumber}', '${expiryDate}', '${cvv}')">
-                <!-- CHIP -->
-                <div class="card-chip">CHIP</div>
+            <div class="virtual-card ${cardConfig.designClass}" 
+                 tabindex="0" 
+                 role="button" 
+                 aria-label="Cartão ${cardConfig.name}"
+                 style="min-width: 320px; height: 200px; margin: 0 16px; padding: 24px; border-radius: 24px; background: linear-gradient(135deg, ${cardConfig.color} 0%, ${shadeColor(cardConfig.color, -40)} 100%); color: white; box-shadow: 0 10px 30px rgba(0,0,0,0.2); position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); transform-style: preserve-3d; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer;"
+                 onclick="showCardDetails('${cardType}', '${cardNumber}', '${expiryDate}', '${cvv}')"
+                 data-card-type="${cardType}">
                 
-                <!-- LOGO VISA -->
-                ${visaSVG}
+                <!-- CHIP -->
+                <div class="card-chip" style="position: absolute; top: 24px; left: 24px; background: rgba(255,255,255,0.2); padding: 6px 12px; border-radius: 4px; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.5px;">CHIP</div>
+                
+                <!-- LOGO DA REDE -->
+                ${getNetworkSVG(cardConfig.network, true)}
 
                 <!-- TIPO/TIER -->
-                <div class="card-tier">${cardConfig.tier}</div>
+                <div class="card-tier" style="position: absolute; top: 24px; right: 24px; font-size: 0.85rem; font-weight: 700; text-shadow: 0 1px 2px rgba(0,0,0,0.3);">${cardConfig.tier}</div>
 
                 <!-- NÚMERO -->
-                <div class="card-number">${cardNumber}</div>
+                <div class="card-number" style="font-size: 1.4rem; font-weight: 700; letter-spacing: 2px; margin: 60px 0 20px 0; text-shadow: 0 2px 4px rgba(0,0,0,0.2);">${cardNumber}</div>
 
                 <!-- TITULAR -->
-                <div class="card-holder">${currentUser.username}</div>
+                <div class="card-holder" style="font-size: 1rem; font-weight: 600; margin-bottom: 8px; text-shadow: 0 1px 2px rgba(0,0,0,0.3);">${currentUser.username}</div>
 
                 <!-- VALIDADE + CVV -->
-                <div class="card-footer">
+                <div class="card-footer" style="display: flex; justify-content: space-between; align-items: flex-end; font-size: 0.85rem; font-weight: 500;">
                     <div class="card-expiry">VALIDO ATE ${expiryDate}</div>
                     <div class="card-cvv">CVV: ${cvv}</div>
                 </div>
 
                 <!-- AÇÕES (copiar/excluir) -->
-                <div class="card-actions" style="position: absolute; bottom: -40px; left: 0; right: 0; display: flex; gap: 8px; padding: 0 24px; opacity: 0; transition: opacity 0.3s, bottom 0.3s; background: rgba(0,0,0,0.7); border-radius: 0 0 16px 16px;">
-                    <button class="btn btn-sm btn-outline" onclick="event.stopPropagation(); copyCardNumber('${cardNumber}');">
+                <div class="card-actions" style="position: absolute; bottom: -50px; left: 0; right: 0; display: flex; gap: 12px; padding: 0 24px; opacity: 0; transition: all 0.4s ease; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); border-radius: 0 0 24px 24px; transform: translateY(10px);">
+                    <button class="btn btn-sm btn-outline" style="flex: 1; min-width: 120px;" onclick="event.stopPropagation(); copyCardNumber('${cardNumber}');">
                         <i data-lucide="copy"></i> Copiar Número
                     </button>
-                    <button class="btn btn-sm btn-danger delete-card-btn" onclick="event.stopPropagation(); handleDeleteCardPrompt('${cardType}');">
+                    <button class="btn btn-sm btn-danger delete-card-btn" style="flex: 1; min-width: 120px;" onclick="event.stopPropagation(); handleDeleteCardPrompt('${cardType}');">
                         <i data-lucide="trash-2"></i> Excluir
                     </button>
                 </div>
@@ -337,12 +534,112 @@ function renderVirtualCard(cardType) {
         `;
     } catch (err) {
         handleError(err, "renderVirtualCard");
-        return `<div class="error-card">Erro ao carregar cartão</div>`;
+        return `<div class="error-card" style="min-width: 320px; padding: 2rem; text-align: center; color: var(--error);">Erro ao carregar cartão</div>`;
     }
 }
 
 // ======================
-// DETALHES DO CARTÃO (MODAL)
+// SVGs DAS REDES (VISA, MASTERCARD, AMEX, ETC)
+// ======================
+
+function getNetworkSVG(network, isLarge = false) {
+    const size = isLarge ? 'width="56" height="36"' : 'width="48" height="30"';
+    switch (network) {
+        case 'visa':
+            return `
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 64" ${size} style="position: absolute; bottom: 20px; right: 20px;" aria-label="Visa">
+                    <path fill="#fff" d="M146.8,25.5v-7.4h-7.5c-2.3,0-4.1,1.1-4.1,3.5c0,1.7,1.1,2.7,3.2,3L146.8,25.5z M159.3,37.1l-4.8-21.9h-7.5l4.9,21.9H159.3z M119.1,37.1l-5.4-21.9h-7.4l5.4,21.9H119.1z M98.6,15.2h-7.5v21.9h7.5V15.2z M76.2,15.2h-7.5v21.9h7.5V15.2z M53.8,15.2h-7.5v21.9h7.5V15.2z M31.4,15.2h-7.5v21.9h7.5V15.2z"/>
+                </svg>
+            `;
+        case 'mastercard':
+            return `
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 216 136" ${size} style="position: absolute; bottom: 20px; right: 20px;" aria-label="Mastercard">
+                    <circle cx="68" cy="68" r="60" fill="#eb001b"/>
+                    <circle cx="148" cy="68" r="60" fill="#f79e1b"/>
+                    <circle cx="108" cy="68" r="36" fill="#ff5f00"/>
+                </svg>
+            `;
+        case 'amex':
+            return `
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 120" ${size} style="position: absolute; bottom: 20px; right: 20px;" aria-label="American Express">
+                    <rect width="200" height="120" fill="#006fcf"/>
+                    <path d="M40,30 L60,90 L80,30 L100,90 L120,30 L140,90 L160,30" stroke="white" stroke-width="8" fill="none"/>
+                </svg>
+            `;
+        case 'unionpay':
+            return `
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 120" ${size} style="position: absolute; bottom: 20px; right: 20px;" aria-label="UnionPay">
+                    <rect width="200" height="120" fill="#0066cc"/>
+                    <circle cx="100" cy="60" r="40" fill="#ffcc00"/>
+                    <text x="100" y="65" text-anchor="middle" fill="#0066cc" font-size="40" font-weight="bold">U</text>
+                </svg>
+            `;
+        case 'diners':
+            return `
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 120" ${size} style="position: absolute; bottom: 20px; right: 20px;" aria-label="Diners Club">
+                    <rect width="200" height="120" fill="#0066b3"/>
+                    <path d="M50,40 L150,40 L130,80 L70,80 Z" fill="white"/>
+                </svg>
+            `;
+        case 'jcb':
+            return `
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 120" ${size} style="position: absolute; bottom: 20px; right: 20px;" aria-label="JCB">
+                    <rect width="200" height="120" fill="#ef3340"/>
+                    <circle cx="100" cy="60" r="40" fill="white"/>
+                    <text x="100" y="65" text-anchor="middle" fill="#ef3340" font-size="40" font-weight="bold">J</text>
+                </svg>
+            `;
+        case 'discover':
+            return `
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 120" ${size} style="position: absolute; bottom: 20px; right: 20px;" aria-label="Discover">
+                    <rect width="200" height="120" fill="#ff6600"/>
+                    <circle cx="100" cy="60" r="40" fill="white"/>
+                    <text x="100" y="65" text-anchor="middle" fill="#ff6600" font-size="40" font-weight="bold">D</text>
+                </svg>
+            `;
+        case 'elo':
+            return `
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 120" ${size} style="position: absolute; bottom: 20px; right: 20px;" aria-label="Elo">
+                    <rect width="200" height="120" fill="#009739"/>
+                    <path d="M60,40 C80,20 120,20 140,40 C160,60 160,100 140,80 C120,60 80,60 60,80 C40,100 40,60 60,40 Z" fill="white"/>
+                </svg>
+            `;
+        case 'rupay':
+            return `
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 120" ${size} style="position: absolute; bottom: 20px; right: 20px;" aria-label="RuPay">
+                    <rect width="200" height="120" fill="#ff9933"/>
+                    <circle cx="100" cy="60" r="40" fill="white"/>
+                    <text x="100" y="65" text-anchor="middle" fill="#ff9933" font-size="40" font-weight="bold">R</text>
+                </svg>
+            `;
+        case 'mir':
+            return `
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 120" ${size} style="position: absolute; bottom: 20px; right: 20px;" aria-label="Mir">
+                    <rect width="200" height="120" fill="#0033aa"/>
+                    <circle cx="100" cy="60" r="40" fill="white"/>
+                    <text x="100" y="65" text-anchor="middle" fill="#0033aa" font-size="40" font-weight="bold">M</text>
+                </svg>
+            `;
+        case 'hipercard':
+            return `
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 120" ${size} style="position: absolute; bottom: 20px; right: 20px;" aria-label="Hipercard">
+                    <rect width="200" height="120" fill="#8b0000"/>
+                    <circle cx="100" cy="60" r="40" fill="white"/>
+                    <text x="100" y="65" text-anchor="middle" fill="#8b0000" font-size="40" font-weight="bold">H</text>
+                </svg>
+            `;
+        default:
+            return `
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 64" ${size} style="position: absolute; bottom: 20px; right: 20px;" aria-label="Cartão">
+                    <rect width="200" height="64" fill="white"/>
+                    <text x="100" y="40" text-anchor="middle" fill="black" font-size="24" font-weight="bold">CARD</text>
+                </svg>
+            `;
+    }
+}
+
+// ======================
+// DETALHES DO CARTÃO (MODAL COM EFEITO 3D)
 // ======================
 
 function showCardDetails(cardType, cardNumber, expiryDate, cvv) {
@@ -359,28 +656,29 @@ function showCardDetails(cardType, cardNumber, expiryDate, cvv) {
             throw new CardSystemError("Dados do cartão não encontrados.", "CardData");
         }
 
-        // ✅ SVG VISA NO MODAL
-        const visaSVG = `
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 64" width="48" height="30" aria-label="Visa">
-                <path fill="#fff" d="M146.8,25.5v-7.4h-7.5c-2.3,0-4.1,1.1-4.1,3.5c0,1.7,1.1,2.7,3.2,3L146.8,25.5z M159.3,37.1l-4.8-21.9h-7.5l4.9,21.9H159.3z M119.1,37.1l-5.4-21.9h-7.4l5.4,21.9H119.1z M98.6,15.2h-7.5v21.9h7.5V15.2z M76.2,15.2h-7.5v21.9h7.5V15.2z M53.8,15.2h-7.5v21.9h7.5V15.2z M31.4,15.2h-7.5v21.9h7.5V15.2z"/>
-            </svg>
-        `;
-
-        const content = `
-            <div class="card-details-modal" style="max-width: 500px; padding: 2rem;">
-                <div class="virtual-card ${cardConfig.designClass}" style="width: 100%; padding: 1.5rem; margin-bottom: 1.5rem; transform: scale(1.1); transform-origin: top center;">
-                    <div class="card-chip">CHIP</div>
-                    ${visaSVG}
-                    <div class="card-tier">${cardConfig.tier}</div>
-                    <div class="card-number">${cardNumber}</div>
-                    <div class="card-holder">${currentUser.username}</div>
-                    <div class="card-footer">
+        const modalContent = `
+            <div class="card-details-modal" style="max-width: 550px; padding: 2.5rem; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border-radius: 28px; box-shadow: 0 20px 60px rgba(0,0,0,0.5);">
+                <div class="virtual-card ${cardConfig.designClass}" 
+                     style="width: 100%; padding: 2rem; margin-bottom: 2rem; border-radius: 24px; background: linear-gradient(135deg, ${cardConfig.color} 0%, ${shadeColor(cardConfig.color, -40)} 100%); color: white; box-shadow: 0 15px 40px rgba(0,0,0,0.3); position: relative; transform: scale(1.05); transform-style: preserve-3d; transition: transform 0.5s;"
+                     data-card-type="${cardType}">
+                    
+                    <div class="card-chip" style="position: absolute; top: 24px; left: 24px; background: rgba(255,255,255,0.2); padding: 6px 12px; border-radius: 4px; font-size: 0.7rem; font-weight: 600;">CHIP</div>
+                    
+                    ${getNetworkSVG(cardConfig.network, true)}
+                    
+                    <div class="card-tier" style="position: absolute; top: 24px; right: 24px; font-size: 0.9rem; font-weight: 700; text-shadow: 0 1px 2px rgba(0,0,0,0.3);">${cardConfig.tier}</div>
+                    
+                    <div class="card-number" style="font-size: 1.6rem; font-weight: 700; letter-spacing: 2px; margin: 60px 0 24px 0; text-shadow: 0 2px 4px rgba(0,0,0,0.2);">${cardNumber}</div>
+                    
+                    <div class="card-holder" style="font-size: 1.1rem; font-weight: 600; margin-bottom: 12px; text-shadow: 0 1px 2px rgba(0,0,0,0.3);">${currentUser.username}</div>
+                    
+                    <div class="card-footer" style="display: flex; justify-content: space-between; align-items: flex-end; font-size: 0.9rem; font-weight: 500;">
                         <div class="card-expiry">VALIDO ATE ${expiryDate}</div>
                         <div class="card-cvv">CVV: ${cvv}</div>
                     </div>
                 </div>
                 
-                <div class="card-info-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+                <div class="card-info-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-bottom: 2rem; color: white;">
                     <div class="card-info-item">
                         <strong>Titular:</strong>
                         <span>${currentUser.username}</span>
@@ -390,8 +688,8 @@ function showCardDetails(cardType, cardNumber, expiryDate, cvv) {
                         <span>${new Date(cardData.acquiredAt).toLocaleDateString('pt-AO')}</span>
                     </div>
                     <div class="card-info-item">
-                        <strong>Limite de Crédito:</strong>
-                        <span>Ilimitado (pré-pago)</span>
+                        <strong>Rede:</strong>
+                        <span style="text-transform: uppercase; font-weight: 600;">${cardConfig.network}</span>
                     </div>
                     <div class="card-info-item">
                         <strong>Cashback:</strong>
@@ -403,22 +701,22 @@ function showCardDetails(cardType, cardNumber, expiryDate, cvv) {
                     </div>
                     <div class="card-info-item">
                         <strong>Status:</strong>
-                        <span style="color: var(--success);">Ativo</span>
+                        <span style="color: #10b981; font-weight: 600;">Ativo</span>
                     </div>
                 </div>
 
-                <div style="margin-bottom: 1.5rem; padding: 1rem; background: var(--surface); border-radius: 8px;">
-                    <strong>Benefícios Inclusos:</strong>
-                    <ul style="margin: 0.5rem 0 0 1.2rem; padding: 0;">
-                        ${cardConfig.perks.map(p => `<li>${p}</li>`).join('')}
+                <div style="margin-bottom: 2rem; padding: 1.2rem; background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border-radius: 16px; border: 1px solid rgba(255,255,255,0.1);">
+                    <strong style="color: white; display: block; margin-bottom: 0.8rem;">Benefícios Inclusos:</strong>
+                    <ul style="margin: 0; padding: 0 0 0 1.5rem; color: rgba(255,255,255,0.9);">
+                        ${cardConfig.perks.map(p => `<li style="margin-bottom: 0.4rem;">${p}</li>`).join('')}
                     </ul>
                 </div>
 
-                <div class="card-actions-full" style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                    <button class="btn btn-outline" style="flex: 1; min-width: 150px;" onclick="copyCardNumber('${cardNumber}')">
+                <div class="card-actions-full" style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem;">
+                    <button class="btn btn-outline" style="flex: 1; min-width: 160px; padding: 0.8rem 1rem;" onclick="copyCardNumber('${cardNumber}')">
                         <i data-lucide="copy"></i> Copiar Número
                     </button>
-                    <button class="btn btn-outline" style="flex: 1; min-width: 150px;" onclick="copyCardDetails('${cardNumber}', '${expiryDate}', '${cvv}')">
+                    <button class="btn btn-outline" style="flex: 1; min-width: 160px; padding: 0.8rem 1rem;" onclick="copyCardDetails('${cardNumber}', '${expiryDate}', '${cvv}')">
                         <i data-lucide="copy"></i> Copiar Todos os Dados
                     </button>
                 </div>
@@ -427,7 +725,7 @@ function showCardDetails(cardType, cardNumber, expiryDate, cvv) {
         
         createModal(
             { text: 'Detalhes do Cartão', icon: 'credit-card' },
-            content,
+            modalContent,
             [
                 { text: 'Fechar', class: 'btn-secondary', icon: 'x', onclick: 'document.querySelector(".modal-overlay")?.remove()' }
             ]
@@ -435,6 +733,25 @@ function showCardDetails(cardType, cardNumber, expiryDate, cvv) {
         
         setTimeout(() => {
             setupCardCopyListeners(cardNumber, expiryDate, cvv);
+            // Aplica efeito 3D ao cartão no modal
+            const modalCard = document.querySelector('.card-details-modal .virtual-card');
+            if (modalCard) {
+                modalCard.addEventListener('mousemove', (e) => {
+                    const rect = modalCard.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / 15;
+                    const rotateY = (centerX - x) / 15;
+                    
+                    modalCard.style.transform = `scale(1.05) rotateY(${rotateY}deg) rotateX(${-rotateX}deg)`;
+                });
+                
+                modalCard.addEventListener('mouseleave', () => {
+                    modalCard.style.transform = 'scale(1.05) rotateY(0deg) rotateX(0deg)';
+                });
+            }
         }, 100);
 
     } catch (err) {
@@ -443,7 +760,7 @@ function showCardDetails(cardType, cardNumber, expiryDate, cvv) {
 }
 
 // ======================
-// CARROSSEL COM SWIPE + SETAS + DOTS
+// CARROSSEL COMPLETO (SETAS + SWIPE + DOTS)
 // ======================
 
 let carouselState = {
@@ -454,7 +771,8 @@ let carouselState = {
     prevTranslate: 0,
     animationID: 0,
     cardWidth: 0,
-    totalCards: 0
+    totalCards: 0,
+    autoPlay: null
 };
 
 function setupCardCarousel() {
@@ -473,10 +791,12 @@ function setupCardCarousel() {
 
         if (carouselState.totalCards === 0) return;
 
-        // Calcula largura do cartão
+        // Calcula largura do cartão (com margem)
         const firstCard = cards[0];
         if (!firstCard) return;
-        carouselState.cardWidth = firstCard.offsetWidth + 20; // + margem
+        const style = window.getComputedStyle(firstCard);
+        const margin = parseFloat(style.marginRight) + parseFloat(style.marginLeft);
+        carouselState.cardWidth = firstCard.offsetWidth + margin;
 
         // Renderiza dots
         renderCarouselDots();
@@ -513,18 +833,102 @@ function setupCardCarousel() {
         // Teclado global
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowLeft') {
+                e.preventDefault();
                 prevCarouselSlide();
             } else if (e.key === 'ArrowRight') {
+                e.preventDefault();
                 nextCarouselSlide();
             }
         });
 
-        updateCarouselNav();
+        // Inicia no primeiro cartão
+        goToCarouselSlide(0);
+
+        // Estilo CSS necessário
+        injectCarouselStyles();
+
         console.log("✅ Carrossel inicializado com sucesso.");
 
     } catch (err) {
         handleError(err, "setupCardCarousel");
     }
+}
+
+function injectCarouselStyles() {
+    const style = document.createElement('style');
+    style.textContent = `
+        .carousel-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.95);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            z-index: 10;
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            color: #333;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+        .carousel-nav-btn:hover {
+            background: rgba(255,255,255,1);
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 6px 25px rgba(0,0,0,0.4);
+        }
+        .carousel-nav-btn.left { left: 20px; }
+        .carousel-nav-btn.right { right: 20px; }
+        .card-carousel-wrapper:hover .carousel-nav-btn,
+        .carousel-nav-btn:focus {
+            opacity: 1;
+        }
+        .carousel-nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: translateY(-50%) scale(1);
+        }
+        
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            margin: 0 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .carousel-dot.active {
+            background: var(--primary, #2563eb);
+            transform: scale(1.2);
+            border-color: rgba(255,255,255,0.8);
+        }
+        .carousel-dot:hover {
+            transform: scale(1.3);
+            background: var(--primary, #2563eb);
+        }
+        
+        .card-carousel {
+            display: flex;
+            align-items: center;
+            padding: 20px 0;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .virtual-card:hover .card-actions {
+            opacity: 1;
+            transform: translateY(0);
+            bottom: 0;
+        }
+    `;
+    document.head.appendChild(style);
 }
 
 function renderCarouselDots() {
@@ -549,53 +953,6 @@ function renderCarouselDots() {
         });
         dotsContainer.appendChild(dot);
     }
-
-    // Estilo básico dos dots
-    const style = document.createElement('style');
-    style.textContent = `
-        .carousel-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: #ccc;
-            margin: 0 4px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        .carousel-dot.active {
-            background: var(--primary, #2563eb);
-        }
-        .carousel-nav-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255,255,255,0.9);
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            z-index: 10;
-            opacity: 0;
-            transition: opacity 0.3s;
-            color: #333;
-        }
-        .carousel-nav-btn:hover {
-            background: rgba(255,255,255,1);
-        }
-        .carousel-nav-btn.left { left: 10px; }
-        .carousel-nav-btn.right { right: 10px; }
-        .card-carousel-wrapper:hover .carousel-nav-btn { opacity: 1; }
-        .carousel-nav-btn:disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
-        }
-    `;
-    document.head.appendChild(style);
 }
 
 function goToCarouselSlide(index) {
@@ -653,6 +1010,7 @@ function startDrag(event) {
     carouselState.prevTranslate = carouselState.currentTranslate;
     carouselState.animationID = requestAnimationFrame(animation);
     document.getElementById('card-carousel')?.classList.add('grabbing');
+    document.body.style.userSelect = 'none';
 }
 
 function animation() {
@@ -669,6 +1027,7 @@ function setSliderPosition() {
 
 function drag(event) {
     if (!carouselState.isDragging) return;
+    event.preventDefault();
     const currentPosition = getPositionX(event);
     carouselState.currentTranslate = carouselState.prevTranslate + currentPosition - carouselState.startPos;
 }
@@ -677,6 +1036,7 @@ function endDrag() {
     if (!carouselState.isDragging) return;
     cancelAnimationFrame(carouselState.animationID);
     carouselState.isDragging = false;
+    document.body.style.userSelect = '';
 
     const movedBy = carouselState.currentTranslate - carouselState.prevTranslate;
     const threshold = carouselState.cardWidth * 0.3;
@@ -705,6 +1065,9 @@ function setupCarouselAccessibility() {
     if (!carousel) return;
 
     carousel.setAttribute('tabindex', '0');
+    carousel.setAttribute('aria-roledescription', 'carrossel');
+    carousel.setAttribute('aria-label', 'Carrossel de cartões Aurora');
+    
     carousel.addEventListener('keydown', (e) => {
         if (e.key === 'ArrowRight') {
             e.preventDefault();
@@ -712,12 +1075,18 @@ function setupCarouselAccessibility() {
         } else if (e.key === 'ArrowLeft') {
             e.preventDefault();
             prevCarouselSlide();
+        } else if (e.key === 'Home') {
+            e.preventDefault();
+            goToCarouselSlide(0);
+        } else if (e.key === 'End') {
+            e.preventDefault();
+            goToCarouselSlide(carouselState.totalCards - 1);
         }
     });
 }
 
 // ======================
-// FUNÇÕES EXISTENTES (COM TRATAMENTO DE ERROS ADICIONADO)
+// FUNÇÕES AUXILIARES (COM TRATAMENTO DE ERROS)
 // ======================
 
 function setupCardCopyListeners(cardNumber, expiryDate, cvv) {
@@ -853,11 +1222,11 @@ function handleDeleteCardPrompt(cardType) {
 
         createModal(
             { text: 'Confirmar Exclusão de Cartão', icon: 'alert-triangle' },
-            `<div style="text-align: center; padding: 1.5rem;">
-                <i data-lucide="alert-triangle" style="font-size: 3rem; color: var(--error); margin-bottom: 1rem;"></i>
-                <h3 style="margin: 0 0 1rem 0;">Tem certeza?</h3>
-                <p>Excluir o cartão <strong>${cardConfig.name}</strong>?</p>
-                <p style="color: var(--text-secondary); margin-top: 1rem;">Você receberá <strong>50% do valor</strong> como reembolso.</p>
+            `<div style="text-align: center; padding: 2rem;">
+                <i data-lucide="alert-triangle" style="font-size: 4rem; color: var(--error); margin-bottom: 1.5rem;"></i>
+                <h3 style="margin: 0 0 1.5rem 0; font-size: 1.5rem;">Tem certeza que deseja excluir?</h3>
+                <p style="font-size: 1.1rem; margin-bottom: 1rem;">Você está prestes a excluir o cartão <strong>${cardConfig.name}</strong>.</p>
+                <p style="color: var(--text-secondary); font-size: 1rem; margin-top: 1rem;">Você receberá <strong>50% do valor</strong> (${formatCurrency(cardConfig.price * 0.5)}) como reembolso.</p>
             </div>`,
             [
                 { 
@@ -927,7 +1296,7 @@ async function confirmDeleteCard(cardType) {
 }
 
 // ======================
-// UTILS (COM TRATAMENTO DE ERROS)
+// UTILS — MOEDA EM KZ (KWANZA ANGOLANO)
 // ======================
 
 function generateCardNumber(uid, cardType) {
@@ -1000,6 +1369,15 @@ function shadeColor(color, percent) {
     }
 }
 
+// ✅ FORMATAR MOEDA PARA KWANZA ANGOLANO (AOA)
+function formatCurrency(amount) {
+    return new Intl.NumberFormat('pt-AO', {
+        style: 'currency',
+        currency: 'AOA',
+        currencyDisplay: 'symbol'
+    }).format(amount);
+}
+
 // ======================
 // TRATAMENTO GLOBAL DE ERROS
 // ======================
@@ -1011,3 +1389,15 @@ window.addEventListener('error', (event) => {
 window.addEventListener('unhandledrejection', (event) => {
     handleError(event.reason, "Unhandled Promise");
 });
+
+// Inicializa animações 3D se GSAP estiver disponível
+if (typeof gsap === 'undefined') {
+    console.warn("GSAP não encontrado. Efeitos 3D estarão limitados.");
+    window.gsap = {
+        to: (element, props) => {
+            if (props.scale) element.style.transform = `scale(${props.scale})`;
+            if (props.rotationY !== undefined) element.style.transform += ` rotateY(${props.rotationY}deg)`;
+            if (props.rotationX !== undefined) element.style.transform += ` rotateX(${props.rotationX}deg)`;
+        }
+    };
+}
