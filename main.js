@@ -118,11 +118,11 @@ function generateUniqueId(prefix) {
 // O ideal é criar um backend (ex: uma Cloud Function ou um endpoint no seu servidor)
 // que recebe a pergunta do seu site, adiciona a chave de forma segura no servidor,
 // chama a API do Gemini e retorna a resposta para o site.
-const GEMINI_API_KEY = 'AIzaSyBJWm9ACIgM0efSACS5pmrGy-IMQI7t7hI'; // <-- 🔑 INSIRA SUA CHAVE AQUI
+const GEMINI_API_KEY = 'AIzaSyB_4lhxnHfuYiUlGm9JKASjvl3wrOp0YL4'; // <-- 🔑 INSIRA SUA CHAVE AQUI
 const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`;
 
 async function callGeminiAPI(prompt, context = "") {
-    if (!GEMINI_API_KEY || GEMINI_API_KEY === 'AIzaSyBJWm9ACIgM0efSACS5pmrGy-IMQI7t7hI') {
+    if (!GEMINI_API_KEY || GEMINI_API_KEY === 'AIzaSyB_4lhxnHfuYiUlGm9JKASjvl3wrOp0YL4') {
         throw new Error("Chave da API do Gemini não configurada. Por favor, insira sua chave real no código.");
     }
 
@@ -260,3 +260,4 @@ function escapeHtml(text) {
     div.textContent = text;
     return div.innerHTML;
 }
+
